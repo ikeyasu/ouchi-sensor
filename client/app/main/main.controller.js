@@ -4,8 +4,8 @@ angular.module('ouchiSensorApp')
   .controller('MainCtrl', function ($scope, $http) {
     $scope.awesomeThings = [];
 
-    $http.get('/api/things').success(function(awesomeThings) {
-      $scope.awesomeThings = awesomeThings;
+    $http.get('/api/things/showSensor').success(function(thing) {
+      $scope.sensor = thing;
     });
 
     $scope.addThing = function() {
