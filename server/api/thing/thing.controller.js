@@ -31,6 +31,13 @@ exports.retrieveSensors = function(req, res) {
   });
 };
 
+exports.showSensor = function(req, res) {
+  Thing.findOne({}, {}, { sort: { 'date' : -1 } }, function(err, thing) {
+    if(err) { return handleError(res, err); }
+    return res.json(200, thing);
+  });
+}
+
 // Get list of things
 exports.index = function(req, res) {
   Thing.find(function (err, things) {
