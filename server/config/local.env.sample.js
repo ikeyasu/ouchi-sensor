@@ -10,5 +10,8 @@ module.exports = {
   SESSION_SECRET:   'ouchisensor-secret',
 
   // Control debug level for modules using visionmedia/debug
-  DEBUG: ''
+  DEBUG: '',
+
+  DEVICE_ID: '',
+  ACCESS_TOKEN: ''
 };

@@ -10,7 +10,26 @@
 'use strict';
 
 var _ = require('lodash');
+var request = require('request');
 var Thing = require('./thing.model');
+
+var TEMP_SENSOR_URL = 'https://api.spark.io/v1/devices/' + process.env.DEVICE_ID +'/temp?access_token=' + process.env.ACCESS_TOKEN;
+var HUMID_SENSOR_URL = 'https://api.spark.io/v1/devices/' + process.env.DEVICE_ID +'/humid?access_token=' + process.env.ACCESS_TOKEN;
+
+function retriveSensor(url, name, callback) {
+  request(url, function(error, response, body) {
+    var value = JSON.parse(body).result;
+    Thing.create({name: name, value: value}, callback);
+  });
+}
+
+// Retrieve sensor data
+exports.retrieveSensors = function(req, res) {
+  retriveSensor(TEMP_SENSOR_URL, 'sensor1-temp', function (err, things_temp) {
+    if(err) { return handleError(res, err); }
+    return res.json(200, things_temp);
+  });
+};
 
 // Get list of things
 exports.index = function(req, res) {

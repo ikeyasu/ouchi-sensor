@@ -6,6 +6,7 @@ var controller = require('./thing.controller');
 var router = express.Router();
 
 router.get('/', controller.index);
+router.get('/retrieveSensors', controller.retrieveSensors);
 router.get('/:id', controller.show);
 router.post('/', controller.create);
 router.put('/:id', controller.update);
