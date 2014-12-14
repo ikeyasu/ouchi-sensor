@@ -32,7 +32,8 @@ exports.retrieveSensors = function(req, res) {
 };
 
 exports.showSensor = function(req, res) {
-  Thing.findOne({}, {}, { sort: { 'date' : -1 } }, function(err, thing) {
+  var query = Thing.where({'value': {'$ne': null }}).sort({'date': -1});
+  query.findOne(function(err, thing) {
     if(err) { return handleError(res, err); }
     return res.json(200, thing);
   });
